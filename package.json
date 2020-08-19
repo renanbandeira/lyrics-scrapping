@@ -1,0 +1,26 @@
+{
+  "name": "letras-scrapping",
+  "version": "1.0.0",
+  "description": "WebScrapping node api to get song lyrics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "PORT=8080 nodemon server.js"
+  },
+  "keywords": [
+    "scrapping",
+    "letras",
+    "lyrics"
+  ],
+  "author": "Renan Bandeira",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  }
+}
