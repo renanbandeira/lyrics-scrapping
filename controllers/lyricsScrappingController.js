@@ -44,20 +44,33 @@ exports.fetch_lyrics_post = async function(req, res) {
     return;
   }
 
-  const axios = require('axios');
+  const request = require('request');
+  const username = "renanbandeira",
+    apiKey = process.env.SCRAPING_BOT_API_KEY,
+    auth = "Basic " + Buffer.from(username + ":" + apiKey).toString("base64")
 
-  try {
-    const response = await axios.get(url, {
-      headers: {
-        'Accept-Encoding': 'gzip, deflate, br',
-        'User-Agent': 'Request-Promise',
-        'Accept': '*/*',
+  request(
+    {
+        method: 'POST',
+        url: 'http://api.scraping-bot.io/scrape/raw-html',
+        json: {
+            url: url
+        },
+        headers: {
+            Accept: 'application/json',
+            Authorization : auth
+        },
+    }, (err, response, body) => {
+      console.log({
+        req,
+        response,
+        body,
+        err,
+      })
+      if (err) {
+        res.send(err);
+        return;
       }
-    })
-    res.send(response.data);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error.response.body);
-    res.send(error);
-  }
+      res.send(body);
+    });
 };
