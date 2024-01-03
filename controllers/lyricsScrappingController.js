@@ -3,7 +3,7 @@
 exports.fetch_lyrics = function(req, res) {
   const url = req.query.url;
   if (!url) {
-    resres.status(400).send({
+    res.status(400).send({
       message: 'URL is not set!'
     });
     return;
@@ -13,9 +13,11 @@ exports.fetch_lyrics = function(req, res) {
 
   request({
     method: 'GET',
-		url: url
+		url: url,
+    headers: {
+      'User-Agent': 'Request-Promise'
+    }
 	}, (err, response, body) => {
-
     if (err) {
       res.send(err);
       return;
