@@ -47,7 +47,13 @@ exports.fetch_lyrics_post = async function(req, res) {
   const axios = require('axios');
 
   try {
-    const response = await axios.get(url)
+    const response = await axios.get(url, {
+      headers: {
+        'Accept-Encoding': 'gzip, deflate, br',
+        'User-Agent': 'Request-Promise',
+        'Accept': '*/*',
+      }
+    })
     res.send(response.data);
     console.log(response.data);
   } catch (error) {
