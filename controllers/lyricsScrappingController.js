@@ -36,7 +36,7 @@ exports.fetch_lyrics = function(req, res) {
 
 
 exports.fetch_lyrics_post = async function(req, res) {
-  const url = req.body.url;
+  const url = req.body.url || req.query.url;
   if (!url) {
     res.status(400).send({
       message: 'URL is not set!'
