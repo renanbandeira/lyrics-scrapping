@@ -15,7 +15,9 @@ exports.fetch_lyrics = function(req, res) {
     method: 'GET',
 		url: url,
     headers: {
-      'User-Agent': 'Request-Promise'
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Cache-Control': 'no-cache',
+      'Accept': '*/*',
     }
 	}, (err, response, body) => {
     if (err) {
@@ -42,7 +44,9 @@ exports.fetch_lyrics_post = function(req, res) {
     method: 'GET',
 		url: url,
     headers: {
-      'User-Agent': 'Request-Promise'
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Cache-Control': 'no-cache',
+      'Accept': '*/*',
     }
 	}, (err, response, body) => {
     if (err) {
