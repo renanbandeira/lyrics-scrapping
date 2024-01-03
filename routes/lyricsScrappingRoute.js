@@ -5,5 +5,5 @@ module.exports = function(app) {
 
   // lyrics Route
   app.get('/', cors(), lyricsScrapping.fetch_lyrics)
-  app.post('/', lyricsScrapping.fetch_lyrics_post)
+  app.post('/', cors(), lyricsScrapping.fetch_lyrics_post)
 };
