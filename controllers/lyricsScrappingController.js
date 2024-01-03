@@ -20,6 +20,12 @@ exports.fetch_lyrics = function(req, res) {
       'Accept': '*/*',
     }
 	}, (err, response, body) => {
+    console.log({
+      req,
+      response,
+      body,
+      err,
+    })
     if (err) {
       res.send(err);
       return;
@@ -29,7 +35,7 @@ exports.fetch_lyrics = function(req, res) {
 };
 
 
-exports.fetch_lyrics_post = function(req, res) {
+exports.fetch_lyrics_post = async function(req, res) {
   const url = req.body.url;
   if (!url) {
     res.status(400).send({
@@ -38,21 +44,18 @@ exports.fetch_lyrics_post = function(req, res) {
     return;
   }
 
-  const request = require('request');
+  const axios = require('axios');
 
-  request({
-    method: 'GET',
-		url: url,
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      'Cache-Control': 'no-cache',
-      'Accept': '*/*',
-    }
-	}, (err, response, body) => {
-    if (err) {
-      res.send(err);
-      return;
-    }
-    res.send(body);
-  });
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',  
+      }
+    })
+    res.send(response.data);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error.response.body);
+    res.send(error);
+  }
 };
